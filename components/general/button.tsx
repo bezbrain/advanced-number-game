@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     marginVertical: 4,
     overflow: "hidden",
+    width: "50%",
   },
   btnInnerContainer: {
     backgroundColor: "#72063c",

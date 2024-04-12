@@ -6,8 +6,12 @@ const StartGameScreens = () => {
   return (
     <View style={styles.inputContainer}>
       <InputField />
-      <Button>Reset</Button>
-      <Button>Confirm</Button>
+
+      {/* Buttons container */}
+      <View style={styles.btnsContainer}>
+        <Button>Reset</Button>
+        <Button>Confirm</Button>
+      </View>
     </View>
   );
 };
@@ -26,5 +30,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.25,
+    alignItems: "center",
+  },
+  btnsContainer: {
+    flexDirection: "row",
+    gap: 8,
+    marginTop: 16,
   },
 });
