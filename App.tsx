@@ -20,7 +20,11 @@ const App = () => {
           style={styles.rootScreen}
           imageStyle={styles.bgImage}
         >
-          {isStartGame ? <GameScreen /> : <StartGameScreens />}
+          {isStartGame ? (
+            <GameScreen />
+          ) : (
+            <StartGameScreens setIsStartGame={setIsStartGame} />
+          )}
         </ImageBackground>
       </LinearGradient>
     </TouchableWithoutFeedback>

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Button, InputField } from "../components/general";
 import { errorMessage } from "../utils/alert-messages";
 
-const StartGameScreens = () => {
+interface StartGameScreenProps {
+  setIsStartGame: Dispatch<SetStateAction<boolean>>;
+}
+
+const StartGameScreens = ({ setIsStartGame }: StartGameScreenProps) => {
   const [isNumber, setIsNumber] = useState<string>("");
 
   const restInputHandler = () => {
@@ -43,6 +47,8 @@ const StartGameScreens = () => {
       );
       return;
     }
+
+    setIsStartGame(true);
   };
 
   //   HANDLE THE RESET BUTTON CLICK
