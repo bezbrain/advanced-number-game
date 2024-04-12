@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 const GameScreen = () => {
   return (
     <View>
-      <Text>Game SCreen</Text>
+      <Text>Game Screen</Text>
     </View>
   );
 };

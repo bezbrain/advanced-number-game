@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ImageBackground,
   Keyboard,
@@ -5,9 +6,11 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import StartGameScreens from "./screens/startGameScreens";
+import { GameScreen, StartGameScreens } from "./screens";
 
 const App = () => {
+  const [isStartGame, setIsStartGame] = useState<boolean>(false);
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <LinearGradient colors={["#ddb52f", "#53253c"]} style={styles.rootScreen}>
@@ -17,7 +20,7 @@ const App = () => {
           style={styles.rootScreen}
           imageStyle={styles.bgImage}
         >
-          <StartGameScreens />
+          {isStartGame ? <GameScreen /> : <StartGameScreens />}
         </ImageBackground>
       </LinearGradient>
     </TouchableWithoutFeedback>
