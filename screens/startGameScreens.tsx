@@ -3,11 +3,11 @@ import { View, StyleSheet } from "react-native";
 import { Button, InputField } from "../components/general";
 
 const StartGameScreens = () => {
-  const [isNumber, setIsNumber] = useState("");
+  const [isNumber, setIsNumber] = useState<string>("");
 
   return (
     <View style={styles.inputContainer}>
-      <InputField />
+      <InputField numberValue={isNumber} setIsNumber={setIsNumber} />
 
       {/* Buttons container */}
       <View style={styles.btnsContainer}>

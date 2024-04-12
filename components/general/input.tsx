@@ -1,7 +1,17 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { StyleSheet, TextInput } from "react-native";
 
-const InputField = () => {
+interface InputFieldProps {
+  numberValue: string;
+  setIsNumber: Dispatch<SetStateAction<string>>;
+}
+
+const InputField = ({ numberValue, setIsNumber }: InputFieldProps) => {
+  const handleNumberInputChange = (inputValue: string) => {
+    // console.log(inputValue);
+    setIsNumber(inputValue);
+  };
+
   return (
     <TextInput
       keyboardType="number-pad"
@@ -9,6 +19,8 @@ const InputField = () => {
       maxLength={2}
       autoCapitalize="none"
       autoCorrect={false}
+      onChangeText={handleNumberInputChange}
+      value={numberValue}
     />
   );
 };
