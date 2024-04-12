@@ -1,8 +1,10 @@
-import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
 import { Button, InputField } from "../components/general";
 
 const StartGameScreens = () => {
+  const [isNumber, setIsNumber] = useState("");
+
   return (
     <View style={styles.inputContainer}>
       <InputField />
