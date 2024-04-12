@@ -1,10 +1,14 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-const Button = () => {
+interface ButtonProps {
+  children: string;
+}
+
+const Button = ({ children }: ButtonProps) => {
   return (
     <View>
-      <Text>Button</Text>
+      <Text>{children}</Text>
     </View>
   );
 };
