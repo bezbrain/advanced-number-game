@@ -7,8 +7,14 @@ interface InputFieldProps {
 }
 
 const InputField = ({ numberValue, setIsNumber }: InputFieldProps) => {
+  // HANDLE CHANGE OF THE INPUT FIELD
   const handleNumberInputChange = (inputValue: string) => {
-    // console.log(inputValue);
+    // Regular expression to allow only numbers
+    const regex = /^[0-9]*$/;
+    if (!regex.test(numberValue)) {
+      console.log("Only number is accepted");
+      return;
+    }
     setIsNumber(inputValue);
   };
 

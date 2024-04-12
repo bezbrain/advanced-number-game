@@ -1,16 +1,33 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { Button, InputField } from "../components/general";
+import { errorMessage } from "../utils/alert-messages";
 
 const StartGameScreens = () => {
   const [isNumber, setIsNumber] = useState<string>("");
 
+  const restInputHandler = () => {
+    setIsNumber("");
+  };
+
   const handleConfirmPress = () => {
     const toNumberValue = Number(isNumber);
+    // Check if the input field is empty
     if (!isNumber) {
-      console.log("Input field cannot be empty");
+      errorMessage(
+        "Empty input field!",
+        "Input field cannot be empty",
+        "Okay",
+        restInputHandler
+      );
       return;
     }
+    // Check if string converted to number is actually a number and not NaN
+    if (isNaN(toNumberValue)) {
+      console.log("Only number is allowed");
+      return;
+    }
+    // Check if number is between 0 and 100
     if (toNumberValue < 1 || toNumberValue > 99) {
       console.log("Type a number between 0 and 100");
       return;
