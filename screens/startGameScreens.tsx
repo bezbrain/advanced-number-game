@@ -5,14 +5,30 @@ import { Button, InputField } from "../components/general";
 const StartGameScreens = () => {
   const [isNumber, setIsNumber] = useState<string>("");
 
+  const handleConfirmPress = () => {
+    const toNumberValue = Number(isNumber);
+    if (!isNumber) {
+      console.log("Input field cannot be empty");
+      return;
+    }
+    if (toNumberValue < 1 || toNumberValue > 99) {
+      console.log("Type a number between 0 and 100");
+      return;
+    }
+  };
+
+  const handleResetPress = () => {
+    //
+  };
+
   return (
     <View style={styles.inputContainer}>
       <InputField numberValue={isNumber} setIsNumber={setIsNumber} />
 
       {/* Buttons container */}
       <View style={styles.btnsContainer}>
-        <Button>Reset</Button>
-        <Button>Confirm</Button>
+        <Button handlePress={handleResetPress}>Reset</Button>
+        <Button handlePress={handleConfirmPress}>Confirm</Button>
       </View>
     </View>
   );
