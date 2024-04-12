@@ -4,9 +4,11 @@ import { StyleSheet, TextInput } from "react-native";
 const InputField = () => {
   return (
     <TextInput
-      keyboardType="numeric"
+      keyboardType="number-pad"
       style={styles.numberInput}
       maxLength={2}
+      autoCapitalize="none"
+      autoCorrect={false}
     />
   );
 };
