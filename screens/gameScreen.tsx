@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button, Title } from "../components/general";
 import { randomNum } from "../utils/randomNumbers";
@@ -7,12 +7,13 @@ import { errorMessage } from "../utils/alert-messages";
 
 interface GameScreenProps {
   isNumber: string;
+  setIsGameOver: Dispatch<SetStateAction<boolean>>;
 }
 
 let minBoundary = 1;
 let maxBoundary = 100;
 
-const GameScreen = ({ isNumber }: GameScreenProps) => {
+const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
   const isNumberToNumber = Number(isNumber);
   const initialGuess = randomNum(minBoundary, maxBoundary, isNumberToNumber);
   const [currentGuess, setCurrentGuess] = useState<number>(initialGuess);
@@ -25,6 +26,10 @@ const GameScreen = ({ isNumber }: GameScreenProps) => {
         "Why lie to me to go lower when I should go higher?",
         "Sorry!"
       );
+      return;
+    }
+    if (currentGuess === isNumberToNumber) {
+      setIsGameOver(true);
       return;
     }
 
@@ -43,6 +48,11 @@ const GameScreen = ({ isNumber }: GameScreenProps) => {
       );
       return;
     }
+    if (currentGuess === isNumberToNumber) {
+      setIsGameOver(true);
+      return;
+    }
+
     minBoundary = currentGuess + 1;
     const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(newRandomNum);

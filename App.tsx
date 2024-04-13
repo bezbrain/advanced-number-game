@@ -7,12 +7,13 @@ import {
   SafeAreaView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { GameScreen, StartGameScreens } from "./screens";
+import { GameOver, GameScreen, StartGameScreens } from "./screens";
 import { Colors } from "./components/helpers";
 
 const App = () => {
   const [isNumber, setIsNumber] = useState<string>("");
   const [isStartGame, setIsStartGame] = useState<boolean>(false);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
   const { accent500, primary500 } = Colors;
 
@@ -29,15 +30,19 @@ const App = () => {
           imageStyle={styles.bgImage}
         >
           <SafeAreaView style={styles.rootScreen}>
-            {isStartGame ? (
-              <GameScreen isNumber={isNumber} />
-            ) : (
+            {!isStartGame && (
               <StartGameScreens
                 setIsStartGame={setIsStartGame}
                 isNumber={isNumber}
                 setIsNumber={setIsNumber}
               />
             )}
+
+            {isStartGame && !isGameOver && (
+              <GameScreen isNumber={isNumber} setIsGameOver={setIsGameOver} />
+            )}
+
+            {isGameOver && <GameOver />}
           </SafeAreaView>
         </ImageBackground>
       </LinearGradient>
