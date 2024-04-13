@@ -4,6 +4,7 @@ import {
   Keyboard,
   StyleSheet,
   TouchableWithoutFeedback,
+  SafeAreaView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { GameScreen, StartGameScreens } from "./screens";
@@ -20,11 +21,13 @@ const App = () => {
           style={styles.rootScreen}
           imageStyle={styles.bgImage}
         >
-          {isStartGame ? (
-            <GameScreen />
-          ) : (
-            <StartGameScreens setIsStartGame={setIsStartGame} />
-          )}
+          <SafeAreaView style={styles.rootScreen}>
+            {isStartGame ? (
+              <GameScreen />
+            ) : (
+              <StartGameScreens setIsStartGame={setIsStartGame} />
+            )}
+          </SafeAreaView>
         </ImageBackground>
       </LinearGradient>
     </TouchableWithoutFeedback>
