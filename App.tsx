@@ -11,6 +11,7 @@ import { GameScreen, StartGameScreens } from "./screens";
 import { Colors } from "./components/helpers";
 
 const App = () => {
+  const [isNumber, setIsNumber] = useState<string>("");
   const [isStartGame, setIsStartGame] = useState<boolean>(false);
 
   const { accent500, primary500 } = Colors;
@@ -29,9 +30,13 @@ const App = () => {
         >
           <SafeAreaView style={styles.rootScreen}>
             {isStartGame ? (
-              <GameScreen />
+              <GameScreen isNumber={isNumber} />
             ) : (
-              <StartGameScreens setIsStartGame={setIsStartGame} />
+              <StartGameScreens
+                setIsStartGame={setIsStartGame}
+                isNumber={isNumber}
+                setIsNumber={setIsNumber}
+              />
             )}
           </SafeAreaView>
         </ImageBackground>

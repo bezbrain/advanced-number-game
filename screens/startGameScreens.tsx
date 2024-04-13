@@ -6,11 +6,15 @@ import { Colors } from "../components/helpers";
 
 interface StartGameScreenProps {
   setIsStartGame: Dispatch<SetStateAction<boolean>>;
+  isNumber: string;
+  setIsNumber: Dispatch<SetStateAction<string>>;
 }
 
-const StartGameScreens = ({ setIsStartGame }: StartGameScreenProps) => {
-  const [isNumber, setIsNumber] = useState<string>("");
-
+const StartGameScreens = ({
+  isNumber,
+  setIsNumber,
+  setIsStartGame,
+}: StartGameScreenProps) => {
   const restInputHandler = () => {
     setIsNumber("");
   };
@@ -59,7 +63,7 @@ const StartGameScreens = ({ setIsStartGame }: StartGameScreenProps) => {
 
   return (
     <View style={styles.inputContainer}>
-      <InputField numberValue={isNumber} setIsNumber={setIsNumber} />
+      <InputField isNumber={isNumber} setIsNumber={setIsNumber} />
 
       {/* Buttons container */}
       <View style={styles.btnsContainer}>

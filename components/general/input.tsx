@@ -3,16 +3,16 @@ import { StyleSheet, TextInput } from "react-native";
 import { Colors } from "../helpers";
 
 interface InputFieldProps {
-  numberValue: string;
+  isNumber: string;
   setIsNumber: Dispatch<SetStateAction<string>>;
 }
 
-const InputField = ({ numberValue, setIsNumber }: InputFieldProps) => {
+const InputField = ({ isNumber, setIsNumber }: InputFieldProps) => {
   // HANDLE CHANGE OF THE INPUT FIELD
   const handleNumberInputChange = (inputValue: string) => {
     // Regular expression to allow only numbers
     const regex = /^[0-9]*$/;
-    if (!regex.test(numberValue)) {
+    if (!regex.test(isNumber)) {
       console.log("Only number is accepted");
       return;
     }
@@ -27,7 +27,7 @@ const InputField = ({ numberValue, setIsNumber }: InputFieldProps) => {
       autoCapitalize="none"
       autoCorrect={false}
       onChangeText={handleNumberInputChange}
-      value={numberValue}
+      value={isNumber}
     />
   );
 };
