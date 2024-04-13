@@ -4,7 +4,7 @@ export const errorMessage = (
   msgHeader: string,
   msgDetails: string,
   msgText: string,
-  msgFunct: () => void
+  msgFunct?: () => void
 ) => {
   Alert.alert(msgHeader, msgDetails, [
     { text: msgText, style: "destructive", onPress: msgFunct },

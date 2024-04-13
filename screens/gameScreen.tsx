@@ -1,21 +1,65 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Title } from "../components/general";
+import { Button, Title } from "../components/general";
 import { randomNum } from "../utils/randomNumbers";
 import { NumberContainer } from "../components/game";
+import { errorMessage } from "../utils/alert-messages";
 
 interface GameScreenProps {
   isNumber: string;
 }
 
+let minBoundary = 1;
+let maxBoundary = 100;
+
 const GameScreen = ({ isNumber }: GameScreenProps) => {
-  const initialGuess = randomNum(Number(isNumber));
-  const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const isNumberToNumber = Number(isNumber);
+  const initialGuess = randomNum(minBoundary, maxBoundary, isNumberToNumber);
+  const [currentGuess, setCurrentGuess] = useState<number>(initialGuess);
+
+  // FUNCTION TO CHECK IF GUESS NUMBER IS TO BE LOWER BEFORE SETTING THE STATE
+  const guessLowerHandler = () => {
+    if (currentGuess < isNumberToNumber) {
+      errorMessage(
+        "Don't lie!",
+        "Why lie to me to go lower when I should go higher?",
+        "Sorry!"
+      );
+      return;
+    }
+
+    maxBoundary = currentGuess;
+    const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
+    setCurrentGuess(newRandomNum);
+  };
+
+  // FUNCTION TO CHECK IF GUESS NUMBER IS TO BE HIGHER BEFORE SETTING THE STATE
+  const guessHigherHandler = () => {
+    if (currentGuess > isNumberToNumber) {
+      errorMessage(
+        "Don't lie!",
+        "Why lie to me to go higher when I should go lower?",
+        "Sorry!"
+      );
+      return;
+    }
+    minBoundary = currentGuess + 1;
+    const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
+    setCurrentGuess(newRandomNum);
+  };
 
   return (
     <View style={styles.gameScreenContainer}>
       <Title>Opponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
+
+      <View>
+        <Text>Higher or Lower?</Text>
+        <View>
+          <Button handlePress={guessLowerHandler}>-</Button>
+          <Button handlePress={guessHigherHandler}>+</Button>
+        </View>
+      </View>
     </View>
   );
 };
