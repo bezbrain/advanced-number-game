@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Button, InputField } from "../components/general";
 import { errorMessage } from "../utils/alert-messages";
+import { Colors } from "../components/helpers";
 
 interface StartGameScreenProps {
   setIsStartGame: Dispatch<SetStateAction<boolean>>;
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
-    backgroundColor: "#53253c",
+    backgroundColor: Colors.primary500,
     borderRadius: 8,
     elevation: 10,
     shadowColor: "red",

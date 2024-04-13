@@ -8,13 +8,19 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { GameScreen, StartGameScreens } from "./screens";
+import { Colors } from "./components/helpers";
 
 const App = () => {
   const [isStartGame, setIsStartGame] = useState<boolean>(false);
 
+  const { accent500, primary500 } = Colors;
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <LinearGradient colors={["#ddb52f", "#53253c"]} style={styles.rootScreen}>
+      <LinearGradient
+        colors={[accent500, primary500]}
+        style={styles.rootScreen}
+      >
         <ImageBackground
           source={require("./assets/images/number-game.jpg")}
           resizeMode="cover"

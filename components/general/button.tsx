@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Colors } from "../helpers";
 
 interface ButtonProps {
   children: string;
@@ -7,11 +8,13 @@ interface ButtonProps {
 }
 
 const Button = ({ children, handlePress }: ButtonProps) => {
+  const { primary700 } = Colors;
+
   return (
     <View style={styles.btnOuterContainer}>
       <Pressable
         onPress={handlePress}
-        android_ripple={{ color: "#331725" }}
+        android_ripple={{ color: primary700 }}
         style={({ pressed }) =>
           pressed
             ? [styles.pressedBtn, styles.btnInnerContainer]
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     width: "50%",
   },
   btnInnerContainer: {
-    backgroundColor: "#72063c",
+    backgroundColor: Colors.primary600,
     paddingVertical: 10,
     paddingHorizontal: 16,
     elevation: 8,
