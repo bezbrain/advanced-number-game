@@ -3,7 +3,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { View, StyleSheet, Text, FlatList } from "react-native";
 import { Button, Card, Title } from "../components/general";
 import { randomNum } from "../utils/randomNumbers";
-import { InstructionText, NumberContainer } from "../components/game";
+import {
+  GuessNumberItem,
+  InstructionText,
+  NumberContainer,
+} from "../components/game";
 import { errorMessage } from "../utils/alert-messages";
 import { Colors } from "../components/helpers";
 
@@ -26,7 +30,9 @@ const GameScreen = ({
   const isNumberToNumber = Number(isNumber);
   const initialGuess = randomNum(minBoundary, maxBoundary, isNumberToNumber);
   const [currentGuess, setCurrentGuess] = useState<number>(initialGuess);
-  const [guessedRounds, setGuessedRounds] = useState([initialGuess]);
+  const [guessedRounds, setGuessedRounds] = useState([
+    { id: Date.now(), value: initialGuess, count: 1 },
+  ]);
 
   // FUNCTION TO CHECK IF GUESS NUMBER IS TO BE LOWER BEFORE SETTING THE STATE
   const guessLowerHandler = () => {
@@ -43,10 +49,14 @@ const GameScreen = ({
     setCurrentGuess(newRandomNum);
     setClickedTimes(clickedTimes + 1);
     setGuessedRounds((prevGuessedRounds) => [
-      newRandomNum,
       ...prevGuessedRounds,
+      {
+        id: Date.now(),
+        value: newRandomNum,
+        count: clickedTimes + 2,
+      },
     ]);
-    console.log(guessedRounds);
+    // console.log(guessedRounds);
   };
 
   // FUNCTION TO CHECK IF GUESS NUMBER IS TO BE HIGHER BEFORE SETTING THE STATE
@@ -64,10 +74,14 @@ const GameScreen = ({
     setCurrentGuess(newRandomNum);
     setClickedTimes(clickedTimes + 1);
     setGuessedRounds((prevGuessedRounds) => [
-      newRandomNum,
       ...prevGuessedRounds,
+      {
+        id: Date.now(),
+        value: newRandomNum,
+        count: clickedTimes + 2,
+      },
     ]);
-    console.log(guessedRounds);
+    // console.log(guessedRounds);
   };
 
   // NAVIGATE TO THE GAME OVER SCREEN AS SOON AS THE SYSTEM GUESSED THE NUMBER CORRECTLY
@@ -97,11 +111,17 @@ const GameScreen = ({
         </View>
       </Card>
 
-      <View>
+      <View style={styles.listNumbersContainer}>
         <FlatList
-          alwaysBounceVertical={false}
+          // alwaysBounceVertical={false}
           data={guessedRounds}
-          renderItem={(eachObj) => <Text>{eachObj.item}</Text>}
+          renderItem={(eachObj) => (
+            <GuessNumberItem
+              randomNum={eachObj.item.value}
+              clickedTimes={eachObj.item.count}
+            />
+          )}
+          keyExtractor={(each, index) => each.id.toString()}
         />
       </View>
     </View>
@@ -124,5 +144,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 8,
     marginTop: 12,
+  },
+  listNumbersContainer: {
+    flex: 1,
   },
 });
