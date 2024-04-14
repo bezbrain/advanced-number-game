@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button, Title } from "../components/general";
 import { randomNum } from "../utils/randomNumbers";
@@ -28,10 +28,10 @@ const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
       );
       return;
     }
-    if (currentGuess === isNumberToNumber) {
-      setIsGameOver(true);
-      return;
-    }
+    // if (currentGuess === isNumberToNumber) {
+    //   setIsGameOver(true);
+    //   return;
+    // }
 
     maxBoundary = currentGuess;
     const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
@@ -48,15 +48,23 @@ const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
       );
       return;
     }
-    if (currentGuess === isNumberToNumber) {
-      setIsGameOver(true);
-      return;
-    }
+    // if (currentGuess === isNumberToNumber) {
+    //   setIsGameOver(true);
+    //   return;
+    // }
 
     minBoundary = currentGuess + 1;
     const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(newRandomNum);
   };
+
+  useEffect(() => {
+    if (currentGuess === isNumberToNumber) {
+      setTimeout(() => {
+        setIsGameOver(true);
+      }, 3000);
+    }
+  }, [currentGuess, isNumberToNumber, setIsGameOver]);
 
   return (
     <View style={styles.gameScreenContainer}>
