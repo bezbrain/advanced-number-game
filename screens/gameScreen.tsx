@@ -28,11 +28,6 @@ const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
       );
       return;
     }
-    // if (currentGuess === isNumberToNumber) {
-    //   setIsGameOver(true);
-    //   return;
-    // }
-
     maxBoundary = currentGuess;
     const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(newRandomNum);
@@ -48,16 +43,12 @@ const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
       );
       return;
     }
-    // if (currentGuess === isNumberToNumber) {
-    //   setIsGameOver(true);
-    //   return;
-    // }
-
     minBoundary = currentGuess + 1;
     const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(newRandomNum);
   };
 
+  // NAVIGATE TO THE GAME OVER SCREEN AS SOON AS THE SYSTEM GUESSED THE NUMBER CORRECTLY
   useEffect(() => {
     if (currentGuess === isNumberToNumber) {
       setTimeout(() => {

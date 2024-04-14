@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { Button, InputField } from "../components/general";
+import React, { Dispatch, SetStateAction } from "react";
+import { View, StyleSheet, Text } from "react-native";
+import { Button, InputField, Title } from "../components/general";
 import { errorMessage } from "../utils/alert-messages";
 import { Colors } from "../components/helpers";
 
@@ -62,13 +62,19 @@ const StartGameScreens = ({
   };
 
   return (
-    <View style={styles.inputContainer}>
-      <InputField isNumber={isNumber} setIsNumber={setIsNumber} />
+    <View style={styles.startGameContainer}>
+      <View style={styles.titleContainer}>
+        <Title>Guess My Number</Title>
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.instructionText}>Enter a Number</Text>
+        <InputField isNumber={isNumber} setIsNumber={setIsNumber} />
 
-      {/* Buttons container */}
-      <View style={styles.btnsContainer}>
-        <Button handlePress={handleResetPress}>Reset</Button>
-        <Button handlePress={handleConfirmPress}>Confirm</Button>
+        {/* Buttons container */}
+        <View style={styles.btnsContainer}>
+          <Button handlePress={handleResetPress}>Reset</Button>
+          <Button handlePress={handleConfirmPress}>Confirm</Button>
+        </View>
       </View>
     </View>
   );
@@ -77,8 +83,20 @@ const StartGameScreens = ({
 export default StartGameScreens;
 
 const styles = StyleSheet.create({
+  startGameContainer: {
+    marginVertical: 48,
+    paddingHorizontal: 24,
+  },
+  titleContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  instructionText: {
+    color: Colors.accent500,
+    fontSize: 18,
+  },
   inputContainer: {
-    marginTop: 100,
+    marginTop: 48,
     marginHorizontal: 24,
     padding: 16,
     backgroundColor: Colors.primary500,
