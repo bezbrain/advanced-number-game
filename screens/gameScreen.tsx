@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Button, Title } from "../components/general";
+import { Button, Card, Title } from "../components/general";
 import { randomNum } from "../utils/randomNumbers";
 import { InstructionText, NumberContainer } from "../components/game";
 import { errorMessage } from "../utils/alert-messages";
@@ -63,15 +63,15 @@ const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
       <Title>Opponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
 
-      <View>
+      <Card>
         <InstructionText instructionStyle={styles.instructionStyle}>
           Higher or Lower?
         </InstructionText>
-        <View>
+        <View style={styles.lowerHigherBtnCon}>
           <Button handlePress={guessLowerHandler}>-</Button>
           <Button handlePress={guessHigherHandler}>+</Button>
         </View>
-      </View>
+      </Card>
     </View>
   );
 };
@@ -85,7 +85,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   instructionStyle: {
-    color: Colors.primary600,
+    color: Colors.accent500,
     fontWeight: "bold",
+  },
+  lowerHigherBtnCon: {
+    flexDirection: "row",
+    gap: 8,
+    marginTop: 12,
   },
 });
