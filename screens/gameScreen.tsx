@@ -10,12 +10,19 @@ import { Colors } from "../components/helpers";
 interface GameScreenProps {
   isNumber: string;
   setIsGameOver: Dispatch<SetStateAction<boolean>>;
+  clickedTimes: number;
+  setClickedTimes: Dispatch<SetStateAction<number>>;
 }
 
 let minBoundary = 1;
 let maxBoundary = 100;
 
-const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
+const GameScreen = ({
+  isNumber,
+  setIsGameOver,
+  clickedTimes,
+  setClickedTimes,
+}: GameScreenProps) => {
   const isNumberToNumber = Number(isNumber);
   const initialGuess = randomNum(minBoundary, maxBoundary, isNumberToNumber);
   const [currentGuess, setCurrentGuess] = useState<number>(initialGuess);
@@ -33,6 +40,7 @@ const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
     maxBoundary = currentGuess;
     const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(newRandomNum);
+    setClickedTimes(clickedTimes + 1);
   };
 
   // FUNCTION TO CHECK IF GUESS NUMBER IS TO BE HIGHER BEFORE SETTING THE STATE
@@ -48,14 +56,14 @@ const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
     minBoundary = currentGuess + 1;
     const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(newRandomNum);
+    setClickedTimes(clickedTimes + 1);
   };
 
   // NAVIGATE TO THE GAME OVER SCREEN AS SOON AS THE SYSTEM GUESSED THE NUMBER CORRECTLY
   useEffect(() => {
+    // setIsGameOver(true);
     if (currentGuess === isNumberToNumber) {
-      setTimeout(() => {
-        setIsGameOver(true);
-      }, 3000);
+      setIsGameOver(true);
     }
   }, [currentGuess, isNumberToNumber, setIsGameOver]);
 

@@ -17,6 +17,7 @@ const App = () => {
   const [isNumber, setIsNumber] = useState<string>("");
   const [isStartGame, setIsStartGame] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [clickedTimes, setClickedTimes] = useState<number>(0);
 
   const { accent500, primary500 } = Colors;
 
@@ -52,10 +53,23 @@ const App = () => {
             )}
 
             {isStartGame && !isGameOver && (
-              <GameScreen isNumber={isNumber} setIsGameOver={setIsGameOver} />
+              <GameScreen
+                isNumber={isNumber}
+                setIsGameOver={setIsGameOver}
+                clickedTimes={clickedTimes}
+                setClickedTimes={setClickedTimes}
+              />
             )}
 
-            {isGameOver && <GameOver />}
+            {isGameOver && (
+              <GameOver
+                isNumber={isNumber}
+                clickedTimes={clickedTimes}
+                setIsStartGame={setIsStartGame}
+                setIsGameOver={setIsGameOver}
+                setIsNumber={setIsNumber}
+              />
+            )}
           </SafeAreaView>
         </ImageBackground>
       </LinearGradient>

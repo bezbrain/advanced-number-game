@@ -16,6 +16,7 @@ const StartGameScreens = ({
   setIsNumber,
   setIsStartGame,
 }: StartGameScreenProps) => {
+  // FUNCTION TO CLEAR INPUT FIELD IF AN ERROR OCCURS
   const restInputHandler = () => {
     setIsNumber("");
   };
