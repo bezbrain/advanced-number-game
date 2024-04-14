@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text, FlatList } from "react-native";
 import { Button, Card, Title } from "../components/general";
 import { randomNum } from "../utils/randomNumbers";
 import { InstructionText, NumberContainer } from "../components/game";
@@ -26,6 +26,7 @@ const GameScreen = ({
   const isNumberToNumber = Number(isNumber);
   const initialGuess = randomNum(minBoundary, maxBoundary, isNumberToNumber);
   const [currentGuess, setCurrentGuess] = useState<number>(initialGuess);
+  const [guessedRounds, setGuessedRounds] = useState([initialGuess]);
 
   // FUNCTION TO CHECK IF GUESS NUMBER IS TO BE LOWER BEFORE SETTING THE STATE
   const guessLowerHandler = () => {
@@ -41,6 +42,11 @@ const GameScreen = ({
     const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(newRandomNum);
     setClickedTimes(clickedTimes + 1);
+    setGuessedRounds((prevGuessedRounds) => [
+      newRandomNum,
+      ...prevGuessedRounds,
+    ]);
+    console.log(guessedRounds);
   };
 
   // FUNCTION TO CHECK IF GUESS NUMBER IS TO BE HIGHER BEFORE SETTING THE STATE
@@ -57,6 +63,11 @@ const GameScreen = ({
     const newRandomNum = randomNum(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(newRandomNum);
     setClickedTimes(clickedTimes + 1);
+    setGuessedRounds((prevGuessedRounds) => [
+      newRandomNum,
+      ...prevGuessedRounds,
+    ]);
+    console.log(guessedRounds);
   };
 
   // NAVIGATE TO THE GAME OVER SCREEN AS SOON AS THE SYSTEM GUESSED THE NUMBER CORRECTLY
@@ -85,6 +96,14 @@ const GameScreen = ({
           </Button>
         </View>
       </Card>
+
+      <View>
+        <FlatList
+          alwaysBounceVertical={false}
+          data={guessedRounds}
+          renderItem={(eachObj) => <Text>{eachObj.item}</Text>}
+        />
+      </View>
     </View>
   );
 };
