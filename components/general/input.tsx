@@ -25,17 +25,16 @@ const InputField = ({ isNumber, setIsNumber }: InputFieldProps) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <TextInput
-        keyboardType="number-pad"
-        style={styles.numberInput}
-        maxLength={2}
-        autoCapitalize="none"
-        autoCorrect={false}
-        onChangeText={handleNumberInputChange}
-        value={isNumber}
-      />
-    </TouchableWithoutFeedback>
+    <TextInput
+      keyboardType="number-pad"
+      style={styles.numberInput}
+      maxLength={2}
+      autoCapitalize="none"
+      autoCorrect={false}
+      onChangeText={handleNumberInputChange}
+      value={isNumber}
+    />
+    // </TouchableWithoutFeedback>
   );
 };
 

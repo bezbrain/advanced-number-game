@@ -1,5 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { View, StyleSheet } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { Button, Card, InputField, Title } from "../components/general";
 import { errorMessage } from "../utils/alert-messages";
 import { InstructionText } from "../components/game";
@@ -64,23 +69,25 @@ const StartGameScreens = ({
   };
 
   return (
-    <View style={styles.startGameContainer}>
-      <View style={styles.titleContainer}>
-        <Title>Guess My Number</Title>
-      </View>
-      <Card>
-        <InstructionText instructionStyle={styles.instructionStyle}>
-          Enter a Number
-        </InstructionText>
-        <InputField isNumber={isNumber} setIsNumber={setIsNumber} />
-
-        {/* Buttons container */}
-        <View style={styles.btnsContainer}>
-          <Button handlePress={handleResetPress}>Reset</Button>
-          <Button handlePress={handleConfirmPress}>Confirm</Button>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.startGameContainer}>
+        <View style={styles.titleContainer}>
+          <Title>Guess My Number</Title>
         </View>
-      </Card>
-    </View>
+        <Card>
+          <InstructionText instructionStyle={styles.instructionStyle}>
+            Enter a Number
+          </InstructionText>
+          <InputField isNumber={isNumber} setIsNumber={setIsNumber} />
+
+          {/* Buttons container */}
+          <View style={styles.btnsContainer}>
+            <Button handlePress={handleResetPress}>Reset</Button>
+            <Button handlePress={handleConfirmPress}>Confirm</Button>
+          </View>
+        </Card>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
