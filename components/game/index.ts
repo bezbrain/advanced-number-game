@@ -1,3 +1,4 @@
 import NumberContainer from "./numberContainer";
+import InstructionText from "./instructionText";
 
-export { NumberContainer };
+export { NumberContainer, InstructionText };

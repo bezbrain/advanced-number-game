@@ -2,8 +2,9 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button, Title } from "../components/general";
 import { randomNum } from "../utils/randomNumbers";
-import { NumberContainer } from "../components/game";
+import { InstructionText, NumberContainer } from "../components/game";
 import { errorMessage } from "../utils/alert-messages";
+import { Colors } from "../components/helpers";
 
 interface GameScreenProps {
   isNumber: string;
@@ -63,7 +64,9 @@ const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
       <NumberContainer>{currentGuess}</NumberContainer>
 
       <View>
-        <Text>Higher or Lower?</Text>
+        <InstructionText instructionStyle={styles.instructionStyle}>
+          Higher or Lower?
+        </InstructionText>
         <View>
           <Button handlePress={guessLowerHandler}>-</Button>
           <Button handlePress={guessHigherHandler}>+</Button>
@@ -80,5 +83,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 32,
     paddingHorizontal: 24,
+  },
+  instructionStyle: {
+    color: Colors.primary600,
+    fontWeight: "bold",
   },
 });

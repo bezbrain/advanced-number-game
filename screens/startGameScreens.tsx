@@ -1,7 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Button, Card, InputField, Title } from "../components/general";
 import { errorMessage } from "../utils/alert-messages";
+import { InstructionText } from "../components/game";
 import { Colors } from "../components/helpers";
 
 interface StartGameScreenProps {
@@ -67,7 +68,9 @@ const StartGameScreens = ({
         <Title>Guess My Number</Title>
       </View>
       <Card>
-        <Text style={styles.instructionText}>Enter a Number</Text>
+        <InstructionText instructionStyle={styles.instructionStyle}>
+          Enter a Number
+        </InstructionText>
         <InputField isNumber={isNumber} setIsNumber={setIsNumber} />
 
         {/* Buttons container */}
@@ -91,9 +94,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
-  instructionText: {
+  instructionStyle: {
     color: Colors.accent500,
-    fontSize: 18,
   },
   btnsContainer: {
     flexDirection: "row",
