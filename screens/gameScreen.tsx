@@ -113,7 +113,7 @@ const GameScreen = ({
 
       <View style={styles.listNumbersContainer}>
         <FlatList
-          // alwaysBounceVertical={false}
+          alwaysBounceVertical={true}
           data={guessedRounds}
           renderItem={(eachObj) => (
             <GuessNumberItem

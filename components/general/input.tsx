@@ -1,5 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { StyleSheet, TextInput } from "react-native";
+import {
+  Keyboard,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { Colors } from "../helpers";
 
 interface InputFieldProps {
@@ -20,15 +25,17 @@ const InputField = ({ isNumber, setIsNumber }: InputFieldProps) => {
   };
 
   return (
-    <TextInput
-      keyboardType="number-pad"
-      style={styles.numberInput}
-      maxLength={2}
-      autoCapitalize="none"
-      autoCorrect={false}
-      onChangeText={handleNumberInputChange}
-      value={isNumber}
-    />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <TextInput
+        keyboardType="number-pad"
+        style={styles.numberInput}
+        maxLength={2}
+        autoCapitalize="none"
+        autoCorrect={false}
+        onChangeText={handleNumberInputChange}
+        value={isNumber}
+      />
+    </TouchableWithoutFeedback>
   );
 };
 

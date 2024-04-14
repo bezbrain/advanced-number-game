@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  ImageBackground,
-  Keyboard,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  SafeAreaView,
-} from "react-native";
+import { ImageBackground, StyleSheet, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -32,48 +26,43 @@ const App = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <LinearGradient
-        colors={[accent500, primary500]}
+    <LinearGradient colors={[accent500, primary500]} style={styles.rootScreen}>
+      <ImageBackground
+        source={require("./assets/images/number-game.jpg")}
+        resizeMode="cover"
         style={styles.rootScreen}
+        imageStyle={styles.bgImage}
       >
-        <ImageBackground
-          source={require("./assets/images/number-game.jpg")}
-          resizeMode="cover"
-          style={styles.rootScreen}
-          imageStyle={styles.bgImage}
-        >
-          <SafeAreaView style={styles.rootScreen}>
-            {!isStartGame && (
-              <StartGameScreens
-                setIsStartGame={setIsStartGame}
-                isNumber={isNumber}
-                setIsNumber={setIsNumber}
-              />
-            )}
+        <SafeAreaView style={styles.rootScreen}>
+          {!isStartGame && (
+            <StartGameScreens
+              setIsStartGame={setIsStartGame}
+              isNumber={isNumber}
+              setIsNumber={setIsNumber}
+            />
+          )}
 
-            {isStartGame && !isGameOver && (
-              <GameScreen
-                isNumber={isNumber}
-                setIsGameOver={setIsGameOver}
-                clickedTimes={clickedTimes}
-                setClickedTimes={setClickedTimes}
-              />
-            )}
+          {isStartGame && !isGameOver && (
+            <GameScreen
+              isNumber={isNumber}
+              setIsGameOver={setIsGameOver}
+              clickedTimes={clickedTimes}
+              setClickedTimes={setClickedTimes}
+            />
+          )}
 
-            {isGameOver && (
-              <GameOver
-                isNumber={isNumber}
-                clickedTimes={clickedTimes}
-                setIsStartGame={setIsStartGame}
-                setIsGameOver={setIsGameOver}
-                setIsNumber={setIsNumber}
-              />
-            )}
-          </SafeAreaView>
-        </ImageBackground>
-      </LinearGradient>
-    </TouchableWithoutFeedback>
+          {isGameOver && (
+            <GameOver
+              isNumber={isNumber}
+              clickedTimes={clickedTimes}
+              setIsStartGame={setIsStartGame}
+              setIsGameOver={setIsGameOver}
+              setIsNumber={setIsNumber}
+            />
+          )}
+        </SafeAreaView>
+      </ImageBackground>
+    </LinearGradient>
   );
 };
 
