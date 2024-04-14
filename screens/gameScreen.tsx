@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import { View, Text, StyleSheet } from "react-native";
 import { Button, Card, Title } from "../components/general";
 import { randomNum } from "../utils/randomNumbers";
@@ -68,8 +69,12 @@ const GameScreen = ({ isNumber, setIsGameOver }: GameScreenProps) => {
           Higher or Lower?
         </InstructionText>
         <View style={styles.lowerHigherBtnCon}>
-          <Button handlePress={guessLowerHandler}>-</Button>
-          <Button handlePress={guessHigherHandler}>+</Button>
+          <Button handlePress={guessLowerHandler}>
+            <Ionicons name="remove" size={24} color="white" />
+          </Button>
+          <Button handlePress={guessHigherHandler}>
+            <Ionicons name="add" size={24} color="white" />
+          </Button>
         </View>
       </Card>
     </View>

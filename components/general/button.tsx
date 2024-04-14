@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../helpers";
 
 interface ButtonProps {
-  children: string;
+  children: string | ReactNode;
   handlePress: () => void;
 }
 
