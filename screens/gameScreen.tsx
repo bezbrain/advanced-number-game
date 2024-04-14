@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Button, Card, Title } from "../components/general";
 import { randomNum } from "../utils/randomNumbers";
 import { InstructionText, NumberContainer } from "../components/game";

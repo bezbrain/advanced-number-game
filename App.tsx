@@ -7,6 +7,9 @@ import {
   SafeAreaView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
+
 import { GameOver, GameScreen, StartGameScreens } from "./screens";
 import { Colors } from "./components/helpers";
 
@@ -16,6 +19,16 @@ const App = () => {
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
   const { accent500, primary500 } = Colors;
+
+  // FONT IMPORT SETUP
+  const [fontsLoaded] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
