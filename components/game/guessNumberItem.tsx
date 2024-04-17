@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../helpers";
 
 interface GuessNumberItemProps {
@@ -17,6 +17,8 @@ const GuessNumberItem = ({ clickedTimes, randomNum }: GuessNumberItemProps) => {
 
 export default GuessNumberItem;
 
+const deviceWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   numberItemContainer: {
     flexDirection: "row",
@@ -29,6 +31,6 @@ const styles = StyleSheet.create({
   },
   numberText: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: deviceWidth > 360 ? 20 : 16,
   },
 });
