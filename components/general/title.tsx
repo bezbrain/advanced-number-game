@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../helpers";
 
 interface TitleProps {
@@ -16,13 +16,15 @@ const Title = ({ children }: TitleProps) => {
 
 export default Title;
 
+const deviceWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   titleContainer: {
     alignItems: "center",
   },
   title: {
     fontFamily: "open-sans-bold",
-    fontSize: 24,
+    fontSize: deviceWidth > 360 ? 24 : 18,
     color: Colors.primary500,
     textAlign: "center",
     borderWidth: 2,
