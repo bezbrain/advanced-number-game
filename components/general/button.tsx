@@ -17,7 +17,7 @@ const Button = ({ children, handlePress }: ButtonProps) => {
   const { primary700 } = Colors;
 
   const { width } = useWindowDimensions();
-  const btnWidth = width > 600 ? 100 : "50%";
+  const btnWidth = width > 600 ? 150 : "50%";
 
   return (
     <View style={[styles.btnOuterContainer, { width: btnWidth }]}>
