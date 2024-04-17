@@ -4,6 +4,10 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  Dimensions,
+  useWindowDimensions,
+  KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 import { Button, Card, InputField, Title } from "../components/general";
 import { errorMessage } from "../utils/alert-messages";
@@ -21,6 +25,8 @@ const StartGameScreens = ({
   setIsNumber,
   setIsStartGame,
 }: StartGameScreenProps) => {
+  const { width, height } = useWindowDimensions();
+
   // FUNCTION TO CLEAR INPUT FIELD IF AN ERROR OCCURS
   const restInputHandler = () => {
     setIsNumber("");
@@ -68,35 +74,49 @@ const StartGameScreens = ({
     setIsNumber("");
   };
 
-  return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.startGameContainer}>
-        <View style={styles.titleContainer}>
-          <Title>Guess My Number</Title>
-        </View>
-        <Card>
-          <InstructionText instructionStyle={styles.instructionStyle}>
-            Enter a Number
-          </InstructionText>
-          <InputField isNumber={isNumber} setIsNumber={setIsNumber} />
+  const marginVerticalDisdance = height > 500 ? 48 : 24;
 
-          {/* Buttons container */}
-          <View style={styles.btnsContainer}>
-            <Button handlePress={handleResetPress}>Reset</Button>
-            <Button handlePress={handleConfirmPress}>Confirm</Button>
+  return (
+    // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    <ScrollView style={styles.screen}>
+      <KeyboardAvoidingView style={styles.screen} behavior="position">
+        <View
+          style={[
+            styles.startGameContainer,
+            { marginVertical: marginVerticalDisdance },
+          ]}
+        >
+          <View style={styles.titleContainer}>
+            <Title>Guess My Number</Title>
           </View>
-        </Card>
-      </View>
-    </TouchableWithoutFeedback>
+          <Card>
+            <InstructionText instructionStyle={styles.instructionStyle}>
+              Enter a Number
+            </InstructionText>
+            <InputField isNumber={isNumber} setIsNumber={setIsNumber} />
+
+            {/* Buttons container */}
+            <View style={styles.btnsContainer}>
+              <Button handlePress={handleResetPress}>Reset</Button>
+              <Button handlePress={handleConfirmPress}>Confirm</Button>
+            </View>
+          </Card>
+        </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
+    // </TouchableWithoutFeedback>
   );
 };
 
 export default StartGameScreens;
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   startGameContainer: {
-    marginVertical: 48,
     paddingHorizontal: 24,
+    alignItems: "center",
   },
   titleContainer: {
     flexDirection: "row",

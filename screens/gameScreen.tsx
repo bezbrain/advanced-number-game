@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 32,
     paddingHorizontal: 24,
+    alignItems: "center",
   },
   instructionStyle: {
     color: Colors.accent500,

@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     borderRadius: 8,
     padding: 8,
+    width: "100%",
   },
   numberText: {
     color: "#ffffff",

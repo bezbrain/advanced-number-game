@@ -1,5 +1,10 @@
 import { ReactNode } from "react";
-import { StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import { Colors } from "../helpers";
 
 interface CardProp {
@@ -7,15 +12,28 @@ interface CardProp {
 }
 
 const Card = ({ children }: CardProp) => {
-  return <View style={styles.card}>{children}</View>;
+  const { width, height } = useWindowDimensions();
+
+  const marginTopDistance = height > 500 ? 48 : 16;
+  const cardWidth = height > 500 ? "100%" : 400;
+
+  return (
+    <View
+      style={[
+        styles.card,
+        { marginTop: marginTopDistance },
+        { width: cardWidth },
+      ]}
+    >
+      {children}
+    </View>
+  );
 };
 
 export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    marginTop: 48,
-    // marginHorizontal: 24,
     padding: 16,
     backgroundColor: Colors.primary500,
     borderRadius: 8,
