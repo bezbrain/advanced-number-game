@@ -1,5 +1,11 @@
 import React, { ReactNode } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import { Colors } from "../helpers";
 
 interface ButtonProps {
@@ -10,8 +16,11 @@ interface ButtonProps {
 const Button = ({ children, handlePress }: ButtonProps) => {
   const { primary700 } = Colors;
 
+  const { width } = useWindowDimensions();
+  const btnWidth = width > 600 ? 100 : "50%";
+
   return (
-    <View style={styles.btnOuterContainer}>
+    <View style={[styles.btnOuterContainer, { width: btnWidth }]}>
       <Pressable
         onPress={handlePress}
         android_ripple={{ color: primary700 }}
@@ -34,7 +43,7 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     marginVertical: 4,
     overflow: "hidden",
-    width: "50%",
+    // width: ,
   },
   btnInnerContainer: {
     backgroundColor: Colors.primary600,

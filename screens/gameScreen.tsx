@@ -1,6 +1,12 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { View, StyleSheet, Text, FlatList } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  useWindowDimensions,
+} from "react-native";
 import { Button, Card, Title } from "../components/general";
 import { randomNum } from "../utils/randomNumbers";
 import {
@@ -33,6 +39,8 @@ const GameScreen = ({
   const [guessedRounds, setGuessedRounds] = useState([
     { id: Date.now(), value: initialGuess, count: 1 },
   ]);
+
+  const { width } = useWindowDimensions();
 
   // FUNCTION TO CHECK IF GUESS NUMBER IS TO BE LOWER BEFORE SETTING THE STATE
   const guessLowerHandler = () => {
@@ -92,9 +100,8 @@ const GameScreen = ({
     }
   }, [currentGuess, isNumberToNumber, setIsGameOver]);
 
-  return (
-    <View style={styles.gameScreenContainer}>
-      <Title>Opponent's Guess</Title>
+  let content = (
+    <>
       <NumberContainer>{currentGuess}</NumberContainer>
 
       <Card>
@@ -110,7 +117,36 @@ const GameScreen = ({
           </Button>
         </View>
       </Card>
+    </>
+  );
 
+  const containerPadding = width > 600 ? 24 : 32;
+
+  if (width > 600) {
+    content = (
+      <>
+        <View style={styles.container}>
+          <Button handlePress={guessLowerHandler}>
+            <Ionicons name="remove" size={24} color="white" />
+          </Button>
+          <NumberContainer>{currentGuess}</NumberContainer>
+          <Button handlePress={guessHigherHandler}>
+            <Ionicons name="add" size={24} color="white" />
+          </Button>
+        </View>
+      </>
+    );
+  }
+
+  return (
+    <View
+      style={[
+        styles.gameScreenContainer,
+        { paddingVertical: containerPadding },
+      ]}
+    >
+      <Title>Opponent's Guess</Title>
+      {content}
       <View style={styles.listNumbersContainer}>
         <FlatList
           alwaysBounceVertical={true}
@@ -148,5 +184,10 @@ const styles = StyleSheet.create({
   },
   listNumbersContainer: {
     flex: 1,
+  },
+  // Min-width of 600px
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
