@@ -43,10 +43,9 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     marginVertical: 4,
     overflow: "hidden",
-    // width: ,
   },
   btnInnerContainer: {
-    backgroundColor: Colors.primary600,
+    backgroundColor: Colors.primary700, // ios style
     paddingVertical: 10,
     paddingHorizontal: 16,
     elevation: 8,

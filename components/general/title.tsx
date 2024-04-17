@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Platform, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../helpers";
 
 interface TitleProps {
@@ -17,6 +17,7 @@ const Title = ({ children }: TitleProps) => {
 export default Title;
 
 const deviceWidth = Dimensions.get("window").width;
+const isAndroid = Platform.OS === "android";
 
 const styles = StyleSheet.create({
   titleContainer: {
@@ -24,12 +25,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "open-sans-bold",
-    fontSize: deviceWidth > 360 ? 24 : 18,
+    fontSize: deviceWidth > 360 ? 20 : 18,
     color: Colors.primary500,
     textAlign: "center",
-    borderWidth: 2,
+    borderWidth: isAndroid ? 2 : 0,
+    // borderWidth: Platform.select({ ios: 0, android: 2 }),
     borderColor: Colors.primary500,
-    padding: 12,
+    paddingVertical: 12,
     maxWidth: "80%",
     width: 300,
   },
