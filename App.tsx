@@ -42,7 +42,7 @@ const App = () => {
             />
           )}
 
-          {!isStartGame && !isGameOver && (
+          {isStartGame && !isGameOver && (
             <GameScreen
               isNumber={isNumber}
               setIsGameOver={setIsGameOver}
@@ -51,7 +51,7 @@ const App = () => {
             />
           )}
 
-          {!isGameOver && (
+          {isGameOver && (
             <GameOver
               isNumber={isNumber}
               clickedTimes={clickedTimes}
