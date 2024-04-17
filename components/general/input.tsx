@@ -1,10 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import {
-  Keyboard,
-  StyleSheet,
-  TextInput,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 import { Colors } from "../helpers";
 
 interface InputFieldProps {

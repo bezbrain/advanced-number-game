@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Colors } from "../helpers";
 
 interface TitleProps {
@@ -7,12 +7,19 @@ interface TitleProps {
 }
 
 const Title = ({ children }: TitleProps) => {
-  return <Text style={styles.title}>{children}</Text>;
+  return (
+    <View style={styles.titleContainer}>
+      <Text style={styles.title}>{children}</Text>
+    </View>
+  );
 };
 
 export default Title;
 
 const styles = StyleSheet.create({
+  titleContainer: {
+    alignItems: "center",
+  },
   title: {
     fontFamily: "open-sans-bold",
     fontSize: 24,
@@ -21,5 +28,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: Colors.primary500,
     padding: 12,
+    maxWidth: "80%",
+    width: 300,
   },
 });
